@@ -1,3 +1,5 @@
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {AngularFireAuthModule, AngularFireAuth} from '@angular/fire/auth'
@@ -47,7 +49,8 @@ import { LoginComponent } from './login/login.component';
     NgbModule
 
   ],
-  providers: [],
+  providers: [AuthService,
+  AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
