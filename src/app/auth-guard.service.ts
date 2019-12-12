@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-  flag: Boolean;
   
   constructor(private auth: AuthService,private router: Router) { }
 
