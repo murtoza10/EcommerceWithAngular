@@ -10,6 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AuthGuardService } from './auth-guard.service';
+import { AdminAuthGuardService } from './admin-auth-guard.service';
 
 
 const routes: Routes = [
@@ -22,8 +23,8 @@ const routes: Routes = [
   { path: 'successfulorder', component: SuccessfullOrderComponent , canActivate:[AuthGuardService] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]  },
   
-  { path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuardService]  },
-  { path: 'admin/orders', component: AdminOrdersComponent , canActivate:[AuthGuardService] }
+  { path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuardService,AdminAuthGuardService]  },
+  { path: 'admin/orders', component: AdminOrdersComponent , canActivate:[AuthGuardService,AdminAuthGuardService] }
 ];
 
 
