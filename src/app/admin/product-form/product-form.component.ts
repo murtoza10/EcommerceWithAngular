@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AppCategory } from 'src/app/models/app-category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -15,7 +16,7 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
 
   categories;
   private subscription: Subscription;
-  constructor(private categoryService: CategoryService, private productService: ProductService) {
+  constructor(private router: Router, private categoryService: CategoryService, private productService: ProductService) {
     
    }
 
@@ -48,7 +49,7 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
 
   save(product){
     this.productService.create(product);
-    console.log(product);
+    this.router.navigate(['/admin/products']);
   }
 
   ngOnDestroy(){
