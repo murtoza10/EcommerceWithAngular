@@ -44,14 +44,15 @@
                             </div>
                     </div>
                     <button class="btn btn-primary">Save</button>
+                    <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
                 </form>
     </div>
     <div class="col-md-6">
             <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" [src]="imageUrl.value" alt="">
+                    <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl" alt="">
                     <div class="card-body">
                       <h5 class="card-title">{{title.value}}</h5>
-                      <p class="card-text">{{price.value | currency: 'USD': true}}</p>
+                      <p class="card-text">{{price.value | currency: 'USD': 'symbol'}}</p>
                     </div>
                   </div>
     </div>

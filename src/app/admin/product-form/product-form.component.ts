@@ -17,6 +17,7 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
   product ={};
   subscription: Subscription;
   subscription1: Subscription;
+  id;
   constructor(private route: ActivatedRoute,
     private router: Router, 
     private categoryService: CategoryService, 
@@ -30,9 +31,9 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
   }
 
   getId(){
-    let id= this.route.snapshot.paramMap.get('id');
-    console.log('id',id);
-     if(id) return this.productService.get(id).snapshotChanges().pipe(
+    this.id= this.route.snapshot.paramMap.get('id');
+    console.log('id',this.id);
+     if(this.id) return this.productService.get(this.id).snapshotChanges().pipe(
       map(action => {
         const $key = action.payload.key;
         const data = { $key, ...action.payload.val() };
@@ -64,13 +65,22 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
 
 
   save(product){
-    this.productService.create(product);
+    if(this.id) this.productService.update(this.id, product);
+    else this.productService.create(product);
+
+    this.router.navigate(['/admin/products']);
+  }
+
+  delete(){
+    if(!confirm('Are you sure you wanna delete this product?')) return;
+
+    this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
-    this.subscription1.unsubscribe();
+    if(this.subscription) this.subscription.unsubscribe();
+    if(this.subscription1) this.subscription1.unsubscribe();
   }
 
 
