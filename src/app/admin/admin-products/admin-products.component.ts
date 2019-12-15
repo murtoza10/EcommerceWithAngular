@@ -13,6 +13,7 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
 
   subscription:Subscription;
   products: AppProducts[]=[];
+  filteredProducts: AppProducts[]=[];
   constructor(private productService: ProductService) {
     //this.products = this.productService.getAll();
    }
@@ -29,9 +30,14 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
         )
       )
     ).subscribe(products => {
-      this.products = products;
+      this.filteredProducts= this.products = products;
       console.log('products',products)
     });
+  }
+
+  filter(query:string){
+    this.filteredProducts = (query) ?
+    this.products.filter(p=> p.title.toLowerCase().includes(query.toLowerCase())): this.products;
   }
 
   ngOnDestroy(){
