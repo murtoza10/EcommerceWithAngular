@@ -4,8 +4,7 @@ import { CategoryService } from './../../category.service';
 import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { AppCategory } from 'src/app/models/app-category';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -15,15 +14,32 @@ import { Router } from '@angular/router';
 export class ProductFormComponent implements OnInit ,OnDestroy{
 
   categories;
-  private subscription: Subscription;
-  constructor(private router: Router, private categoryService: CategoryService, private productService: ProductService) {
-    
+  product ={};
+  subscription: Subscription;
+  subscription1: Subscription;
+  constructor(private route: ActivatedRoute,
+    private router: Router, 
+    private categoryService: CategoryService, 
+    private productService: ProductService) {
+     
    }
 
   ngOnInit() {
-    this.getCategoriesList();
+    this.subscription= this.getCategoriesList();
+    this.subscription1= this.getId();
   }
 
+  getId(){
+    let id= this.route.snapshot.paramMap.get('id');
+    console.log('id',id);
+     if(id) return this.productService.get(id).snapshotChanges().pipe(
+      map(action => {
+        const $key = action.payload.key;
+        const data = { $key, ...action.payload.val() };
+        return data;
+      }))
+      .subscribe(p=>{ this.product =p; console.log(p);});
+  }
   // getCategoriesList() {
   //   this.categoryService.getCategories().valueChanges().
   //   subscribe(categories => {
@@ -34,7 +50,7 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
 
   //snapshotChanges allows to access the key
   getCategoriesList() {
-    this.categoryService.getCategories().snapshotChanges().pipe(
+    return this.categoryService.getCategories().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ key: c.payload.key, ...c.payload.val() })
@@ -54,6 +70,7 @@ export class ProductFormComponent implements OnInit ,OnDestroy{
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+    this.subscription1.unsubscribe();
   }
 
 

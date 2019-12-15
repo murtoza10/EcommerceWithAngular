@@ -1,15 +1,28 @@
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AppProducts } from './models/app-products';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private dbPath = '/products';
 
-  constructor(private  db: AngularFireDatabase) { }
+  productsRef: AngularFireList<AppProducts> = null;
+
+  constructor(private  db: AngularFireDatabase) {
+    this.productsRef = db.list(this.dbPath);
+   }
 
   create(product){
     return this.db.list('/products').push(product);
   }
 
+  getAll(){
+    return this.productsRef;
+  }
+
+  get(productId){
+    return this.db.object('/products/'+productId);
+  }
 }
