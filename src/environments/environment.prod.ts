@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  aot:false,
   firebase: {
     apiKey: "AIzaSyCDjcR5gb7r2D4ngTvHkUQkRUlIMeqaYzI",
     authDomain: "ecommercewithangular.firebaseapp.com",
@@ -10,4 +11,5 @@ export const environment = {
     appId: "1:2613695636:web:434714cc0fe3afd8495081",
     measurementId: "G-87CCNCJT75"
   }
+  
 };

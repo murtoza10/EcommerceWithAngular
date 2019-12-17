@@ -1,18 +1,22 @@
 import { AppProducts } from './models/app-products';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Injectable } from '@angular/core';
+
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  PRODUCTS: AppProducts[]=[];
+
   private dbPath = '/products';
 
   productsRef: AngularFireList<AppProducts> = null;
 
   constructor(private  db: AngularFireDatabase) {
     this.productsRef = db.list(this.dbPath);
-   }
+  }
 
   create(product){
     return this.db.list('/products').push(product);
@@ -33,4 +37,5 @@ export class ProductService {
   delete(productId){
     return this.db.object('/products/'+productId).remove();
   }
+
 }

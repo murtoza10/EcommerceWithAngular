@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { ProductService } from './product.service';
 import { CategoryService } from './category.service';
 import { UserService } from './user.service';
@@ -11,7 +12,9 @@ import { environment } from 'src/environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule} from '@angular/material';
 
 
 
@@ -31,6 +34,7 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,20 +52,33 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    CustomFormsModule
+    CustomFormsModule,
+    BrowserAnimationsModule
 
+  ],
+  exports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule
   ],
   providers: [AuthService,
   AuthGuardService,
   UserService,
   CategoryService,
   ProductService,
+  DecimalPipe,
   AdminAuthGuardService],
   bootstrap: [AppComponent]
 })

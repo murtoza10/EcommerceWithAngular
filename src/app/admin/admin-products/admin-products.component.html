@@ -1,11 +1,11 @@
 <p>
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
-<p>
+<!-- <p>
     <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
-</p>
+</p> -->
 
-<table class="table">
+<!-- <table class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -22,6 +22,37 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
-
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" type="text" placeholder="Filter...">
+    </mat-form-field>
+  </div>
+  
+  <div class="example-container mat-elevation-z8">
+  
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.price}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let row"> <a [routerLink]="['/admin/products', row.key]">Edit</a> </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
