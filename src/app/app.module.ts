@@ -14,7 +14,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule} from '@angular/material';
+import {MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule, MatCardModule, MatButtonModule, MatSelectModule, MatGridListModule} from '@angular/material';
 
 
 
@@ -32,6 +32,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 
 
@@ -48,7 +49,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,10 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatGridListModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -67,12 +73,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     BrowserAnimationsModule
 
   ],
-  exports: [
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule
-  ],
+  
   providers: [AuthService,
   AuthGuardService,
   UserService,

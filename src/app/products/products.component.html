@@ -1,1 +1,68 @@
-<p>products works!</p>
+
+<!-- <mat-grid-list cols="2" rowHeight="400px" gutterSize="0px">
+    <mat-grid-tile *ngFor="let p of products">
+    <mat-card 
+    
+    class="example-card" style="width: 14rem;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{p.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{p.imageUrl}}" alt="">
+    <mat-card-content>
+      <p>
+        {{p.price|currency:'USD':'symbol'}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions style="align-items: center;">
+        <button mat-raised-button color="primary" >Add To Cart</button>
+    </mat-card-actions>
+  </mat-card>    
+</mat-grid-tile>
+<div *ngIf="(i+1)%2===0" class="w-100"></div> 
+  </mat-grid-list> -->
+
+  <div class="row" >
+      <div class="col-3">
+          <product-filter [category]="category" ></product-filter  >
+          
+          
+      </div>
+      <div class="col">
+        <div class="row">
+    
+            <ng-container *ngFor="let p of filteredProducts let i= index" >
+              
+              <div class="col">
+                  <mat-card 
+                    class="example-card" style="width: 20rem;">
+          <mat-card-header>
+            <mat-card-title class="card-title" >{{p.title}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{p.imageUrl}}" alt="">
+          <mat-card-content>
+            <p>
+              {{p.price|currency:'USD':'symbol'}}
+            </p>
+          </mat-card-content>
+          
+          <mat-card-actions>
+              <div class="card-footer">
+              <button mat-raised-button color="primary" class="btn-block">Add To Cart</button>
+          </div>
+          </mat-card-actions>
+      
+        </mat-card> 
+              </div>
+              <div *ngIf="(i+1)%2===0" class="w-100"></div>
+      
+            </ng-container>
+          
+        </div>
+      </div>
+  </div>
+
+
+  
+
+
