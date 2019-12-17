@@ -34,25 +34,7 @@
             <ng-container *ngFor="let p of filteredProducts let i= index" >
               
               <div class="col">
-                  <mat-card 
-                    class="example-card" style="width: 20rem;">
-          <mat-card-header>
-            <mat-card-title class="card-title" >{{p.title}}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="{{p.imageUrl}}" alt="">
-          <mat-card-content>
-            <p>
-              {{p.price|currency:'USD':'symbol'}}
-            </p>
-          </mat-card-content>
-          
-          <mat-card-actions>
-              <div class="card-footer">
-              <button mat-raised-button color="primary" class="btn-block">Add To Cart</button>
-          </div>
-          </mat-card-actions>
-      
-        </mat-card> 
+                  <product-card [product]="p" [show-actions]="true"></product-card>
               </div>
               <div *ngIf="(i+1)%2===0" class="w-100"></div>
       
