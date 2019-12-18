@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { DecimalPipe } from '@angular/common';
 import { ProductService } from './product.service';
 import { CategoryService } from './category.service';
@@ -81,7 +82,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
   UserService,
   CategoryService,
   ProductService,
-  DecimalPipe,
+  ShoppingCartService,
   AdminAuthGuardService],
   bootstrap: [AppComponent]
 })

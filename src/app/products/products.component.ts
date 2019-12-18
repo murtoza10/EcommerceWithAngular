@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
   subscription:Subscription;
   subscription1:Subscription;
   products: AppProducts[]=[];
-  product ={};
   category:string;
   filteredProducts: AppProducts[]=[];
   constructor(private route:ActivatedRoute, private productService: ProductService) { 
@@ -52,9 +51,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
       //console.log('products',products)
     });
   }
-
-
-  
 
   ngOnDestroy(){
     if(this.subscription) this.subscription.unsubscribe();
