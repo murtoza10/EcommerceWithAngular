@@ -12,7 +12,19 @@
 
     <mat-card-actions *ngIf="showActions">
         <div class="card-footer">
-            <button mat-raised-button color="primary" class="btn-block" (click)="addToCart(product)">Add To Cart</button>
+            <button *ngIf="items?.quantity===0; else updateQuantity"
+            mat-raised-button color="secondary" class="btn-block" (click)="addToCart()">Add To Cart</button>
+            <ng-template #updateQuantity>
+                <div class="row no-gutters">
+                    <div class="col-2">
+                        <button (click)="removeFromCart()"class="btn btn-secondary btn-block">-</button>
+                    </div>
+                    <div class="col text-center">{{items?.quantity}} in Cart</div>
+                    <div class="col-2">
+                        <button (click)="addToCart()" class="btn btn-secondary btn-block">+</button>
+                    </div>
+                </div>
+            </ng-template>
         </div>
     </mat-card-actions>
 

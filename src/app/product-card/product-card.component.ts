@@ -13,18 +13,17 @@ import { Observable, Subscription } from 'rxjs';
 export class ProductCardComponent implements OnInit,OnDestroy{
   @Input('product') product:AppProducts;
   @Input('show-actions') showActions = true;
+  @Input('shopping-cart') shoppingCart;
   subscription: Subscription;
   items: AppItems=null;
-  item={};
-  constructor(private cartService: ShoppingCartService) { }
-  ngOnInit(){
+  cartId;
+  constructor(private cartService: ShoppingCartService) { 
     
   }
-
-  addToCart(product: AppProducts){
-    let cartId =  this.cartService.getOrCreateCartId();
-    this.subscription= this.cartService.getItem(cartId,product.key).snapshotChanges().pipe(
-      take(1),
+  ngOnInit(){
+    this.cartId =  this.cartService.getOrCreateCartId();
+    this.subscription= this.cartService.getItem(this.cartId,this.product.key).snapshotChanges().pipe(
+      // take(1),
       map(action => {
         const $key = action.payload.key;
         const data = { $key, ...action.payload.val() };
@@ -32,12 +31,20 @@ export class ProductCardComponent implements OnInit,OnDestroy{
       })
     ).subscribe(items=> {
       this.items= items;
-      console.log('items ',items);
-      console.log('this items ',this.items);
-      this.cartService.getItem(cartId,product.key).update({product:product, quantity: ( this.items.quantity|| 0) +1});
-  
+      if(this.items.quantity==null) this.items.quantity=0;
+      // console.log('items ',items);
+      // console.log('this items ',this.items);
       });
   }
+
+  removeFromCart(){
+    this.cartService.getItem(this.cartId,this.product.key).update({product:this.product, quantity: ( this.items.quantity|| 0) -1});
+  }
+  addToCart(){
+    
+      this.cartService.getItem(this.cartId,this.product.key).update({product:this.product, quantity: ( this.items.quantity|| 0) +1});
+  }
+
 
   ngOnDestroy(){
     this.subscription.unsubscribe();

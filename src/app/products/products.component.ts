@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../category.service';
 import { ProductService } from './../product.service';
@@ -15,16 +16,19 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
   subscription:Subscription;
   subscription1:Subscription;
+  subscription2:Subscription;
   products: AppProducts[]=[];
   category:string;
+  cart;
   filteredProducts: AppProducts[]=[];
-  constructor(private route:ActivatedRoute, private productService: ProductService) { 
+  constructor(private route:ActivatedRoute, private productService: ProductService,private shoppingCartService: ShoppingCartService) { 
     
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.subscription=this.getProductsList();
-    
+    this.subscription2= (await this.shoppingCartService.getCart()).snapshotChanges().subscribe(cart=>
+      this.cart=cart);
   }
 
   filter(){
@@ -55,6 +59,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
   ngOnDestroy(){
     if(this.subscription) this.subscription.unsubscribe();
     if(this.subscription1) this.subscription1.unsubscribe();
+    if(this.subscription2) this.subscription2.unsubscribe();
   }
 
 }

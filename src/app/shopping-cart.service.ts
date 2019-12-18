@@ -19,7 +19,8 @@ export class ShoppingCartService {
     });
   }
 
-  getCart(cartId: string){
+  async getCart(){
+    let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-cart/'+cartId);
   }
 
@@ -37,6 +38,15 @@ export class ShoppingCartService {
     let result = this.create();
     localStorage.setItem('cartId', result.key);
     return result.key;
+  }
+
+  getOrCreateCartIdForInit(){
+    let cartId = localStorage.getItem('cartId');
+    if(cartId) return cartId;
+
+    // let result = this.create();
+    // localStorage.setItem('cartId', result.key);
+    // return result.key;
   }
 
   // private getOrCreateCart(){
