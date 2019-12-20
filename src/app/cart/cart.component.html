@@ -1,1 +1,59 @@
-<p>cart works!</p>
+<h1>Shopping Cart</h1>
+
+<ng-container >
+    <p>You have {{TotalCartItemCount}} items in your Shopping Cart</p>
+</ng-container>
+<div class="row col-10">
+  <!-- <div class="example-container mat-elevation-z8"> -->
+      <table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th class="text-center" style="width:230px;">Quantity</th>
+            <th class="text-right" style="width:180px;">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of items" >
+            
+            <td>{{p.title}}</td>
+            <td><product-quantity [product]="p" [shopping-cart]="cart"></product-quantity></td>
+            <td class="text-right">{{p.price*p.quantity | currency: 'USD' :'symbol'}} </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr >
+            <td></td>
+            <td></td>
+            <td></td>
+            <th class="text-right">{{TotalPrice | currency: 'USD' :'symbol'}} </th>
+        </tr>
+    </tfoot>
+</table>
+    <!-- <mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.price | currency: 'USD' :'symbol'}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+   -->
+  <!-- </div> -->
+</div>
+  <button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Cart</button>
+

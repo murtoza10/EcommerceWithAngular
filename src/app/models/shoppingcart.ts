@@ -1,4 +1,5 @@
 import { AppItems } from './app-items';
-export interface AppShoppingCart{
+export class AppShoppingCart{
     items: AppItems[];
+
 }

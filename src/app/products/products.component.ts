@@ -1,3 +1,4 @@
+import { AppShoppingCart } from './../models/shoppingcart';
 import { ShoppingCartService } from './../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../category.service';
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
   subscription2:Subscription;
   products: AppProducts[]=[];
   category:string;
-  cart;
+  cart:AppShoppingCart;
   filteredProducts: AppProducts[]=[];
   constructor(private route:ActivatedRoute, private productService: ProductService,private shoppingCartService: ShoppingCartService) { 
     
@@ -27,7 +28,13 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
   async ngOnInit() {
     this.subscription=this.getProductsList();
-    this.subscription2= (await this.shoppingCartService.getCart()).snapshotChanges().subscribe(cart=>
+    this.subscription2= (await this.shoppingCartService.getCart()).snapshotChanges().pipe(
+      map(action => {
+        const $key = action.payload.key;
+        const data = { $key, ...action.payload.val() };
+        return data;
+      })
+    ).subscribe(cart=>
       this.cart=cart);
   }
 
