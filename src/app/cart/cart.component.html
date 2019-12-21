@@ -16,7 +16,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of items" >
-            
+            <td>
+                <div [style.backgroundImage]="'url('+p.imageUrl+')'" class="thumbnail"></div>
+            </td>
             <td>{{p.title}}</td>
             <td><product-quantity [product]="p" [shopping-cart]="cart"></product-quantity></td>
             <td class="text-right">{{p.price*p.quantity | currency: 'USD' :'symbol'}} </td>
