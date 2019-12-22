@@ -37,4 +37,15 @@ export class AuthService {
       }));
   }
 
+  get UserId(): string{
+    let userId="";
+    this.user$.pipe(
+      switchMap(user=> {
+        if(user) return userId= user.uid;
+        return observableOf(null);
+      }));
+      console.log('user',userId);
+      return userId;
+  }
+
 }
