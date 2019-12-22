@@ -2,6 +2,7 @@
 
 <ng-container >
     <p>You have {{TotalCartItemCount}} items in your Shopping Cart</p>
+    <button *ngIf="TotalCartItemCount!==0" (click)="clearCart()" class="btn btn-light btn-sm">Clear Cart</button>
 </ng-container>
 <div class="row col-10">
   <!-- <div class="example-container mat-elevation-z8"> -->
@@ -56,6 +57,7 @@
     </mat-table>
    -->
   <!-- </div> -->
+  <a *ngIf="TotalCartItemCount!==0"routerLink="/checkout" class="btn btn-primary">Check Out</a>
 </div>
-  <button (click)="clearCart()" class="btn btn-danger btn-sm">Clear Cart</button>
+  
 

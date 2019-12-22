@@ -3,7 +3,6 @@ import { AppItems } from './../models/app-items';
 import { ShoppingCartService } from './../shopping-cart.service';
 import { NavbarComponent } from './../navbar/navbar.component';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { AppItems } from '../models/app-items';
 import { map, take } from 'rxjs/operators';
 import { AppShoppingCart } from '../models/shoppingcart';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
@@ -27,7 +26,7 @@ export class CartComponent implements OnInit,OnDestroy {
   TotalCartItemCount: number;
   cart: AppShoppingCart;
   products: AppProducts[]=[];
-  items:AppItems[]=[];
+  items;
   TotalItemPrice:number[]=[];
   TotalPrice:number;
 

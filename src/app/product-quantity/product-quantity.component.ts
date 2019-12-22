@@ -17,7 +17,7 @@ export class ProductQuantityComponent{
   constructor(private cartService: ShoppingCartService) { }
   
   getQuantity(){
-    if(typeof this.shoppingCart.items==='undefined') return 0;
+    if(typeof this.shoppingCart.items==='undefined'||typeof this.shoppingCart==='undefined') return 0;
     let item = this.shoppingCart.items[this.product.key];
     // console.log('pro',this.product);
     // console.log('prokey',this.product.key);
