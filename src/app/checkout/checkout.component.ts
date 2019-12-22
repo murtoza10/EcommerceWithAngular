@@ -14,9 +14,10 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
 
-  items={};
+  items;
   TotalItemPrice:number[]=[];
   TotalPrice:number;
+  TotalCartItemCount:number;
   userId;
   subscription:Subscription;
   subscription1: Subscription;
@@ -52,11 +53,11 @@ export class CheckoutComponent implements OnInit {
       )
     ).subscribe(cart=>{
       this.items =cart;     
-      // this.TotalCartItemCount=0;
+      this.TotalCartItemCount=0;
       // this.TotalItemPrice=0;
       this.TotalPrice=0;
         for(let productId in cart) {
-          // this.TotalCartItemCount += this.items[productId].quantity;
+           this.TotalCartItemCount += this.items[productId].quantity;
           this.TotalItemPrice[productId]= this.items[productId].quantity * this.items[productId].price;
           this.TotalPrice += this.TotalItemPrice[productId];
           console.log('totalprice', this.TotalPrice);
