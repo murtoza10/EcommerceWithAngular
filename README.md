@@ -1,5 +1,4 @@
 # EcommerceWithAngular
-
 E-commerce Site using Angular 8 & Firebase.
 Features
 - Single Sign On with Gmail
