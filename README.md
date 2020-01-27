@@ -1,5 +1,14 @@
 # EcommerceWithAngular
 
+E-commerce Site using Angular 8 & Firebase.
+Features
+- Single Sign On with Gmail
+- Admin Section for Product Management like view, add, edit, delete the products
+- Categorized Product Section with fast searching option
+- Adding Products to Cart & editing cart item of specific product from the product cards
+- Check-out option with proper billing and shipping information
+- Real-time database reflects the changes in every tab without refreshing it
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
 ## Development server
