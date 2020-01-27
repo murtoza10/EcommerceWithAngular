@@ -1,5 +1,6 @@
 # EcommerceWithAngular
 E-commerce Site using Angular 8 & Firebase.
+
 Features
 - Single Sign On with Gmail
 - Admin Section for Product Management like view, add, edit, delete the products
